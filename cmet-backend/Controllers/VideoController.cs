@@ -20,7 +20,10 @@ namespace cmet_backend.Controllers
             //if (material == null)
             //    return ApiError("NOT_FOUND", $"VideoMaterial with id {id} not found", 404);
 
-            throw new Exception("Неизвестная ошибка, тест");
+            if (id.StartsWith("e"))
+            {
+                throw new Exception("Неизвестная ошибка, тест");
+            }
 
             return ApiOk(new VideoMaterial()
             {

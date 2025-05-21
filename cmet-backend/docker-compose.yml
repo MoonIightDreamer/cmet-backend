@@ -1,34 +1,15 @@
 version: '3.9'
 
 services:
-  db:
-    image: postgres:16
-    container_name: postgres_container
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    networks:
-      - backend-network
-
   backend:
-    build: ./backend
+    build: .
     container_name: aspnet_backend
     ports:
       - "5000:80"
-    depends_on:
-      - db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - backend-network
-
-volumes:
-  db_data:
 
 networks:
   backend-network:

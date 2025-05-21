@@ -11,7 +11,6 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["cmet-backend/cmet-backend.csproj", "cmet-backend/"]
 RUN dotnet restore "./cmet-backend/cmet-backend.csproj"
 COPY . .
 WORKDIR "/src/cmet-backend"
