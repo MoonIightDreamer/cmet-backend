@@ -25,6 +25,14 @@ namespace cmet_backend.Common
             };
         }
 
+        public static ApiResponse success()
+        {
+            return new ApiResponse
+            {
+                Success = true
+            };
+        }
+
         public static ApiResponse fail(string code, string message)
         {
             return new ApiResponse

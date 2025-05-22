@@ -6,6 +6,7 @@ namespace cmet_backend.Repositories
     {
         Task<IEnumerable<VideoMaterial>> GetAllAsync();
         Task<VideoMaterial?> GetByIdAsync(string id);
+        Task<bool> existsById(string id);
         Task AddAsync(VideoMaterial material);
         Task UpdateAsync(VideoMaterial material);
         Task DeleteAsync(string id);
