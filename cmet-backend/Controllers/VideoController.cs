@@ -74,6 +74,10 @@ namespace cmet_backend.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(string id, VideoMaterialData videoData)
         {
+            if (!(await repository.ExistsById(id)))
+            {
+                return ApiError("NOT_FOUND", $"VideoMaterial with id {id} not found", 404);
+            }
             var entity = new VideoMaterial()
             {
                 Id = id,
