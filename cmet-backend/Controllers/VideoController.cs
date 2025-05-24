@@ -5,6 +5,9 @@ using System.Collections;
 
 namespace cmet_backend.Controllers
 {
+    /// <summary>
+    /// Сервис управления видеоматериалами
+    /// </summary>
     [Route("v1/video")]
     public class VideoController : BaseApiController
     {
@@ -17,6 +20,11 @@ namespace cmet_backend.Controllers
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Получение информации о видео по id
+        /// </summary>
+        /// <param name="id">Идентификатор видео</param>
+        /// <returns>Информация о видео вместе со ссылкой</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
@@ -30,13 +38,20 @@ namespace cmet_backend.Controllers
             return ApiOk(material);
         }
 
+        /// <summary>
+        /// Получение всех видео
+        /// </summary>
+        /// <returns>Список видео</returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-
             return ApiOk(repository.GetAllAsync().Result);
         }
 
+        /// <summary>
+        /// Добавление видео в список материалов
+        /// </summary>
+        /// <param name="videoData">Данные видео</param>
         [HttpPost]
         public async Task<IActionResult> Add(VideoMaterialData videoData)
         {
@@ -51,6 +66,11 @@ namespace cmet_backend.Controllers
             return ApiOk();
         }
 
+        /// <summary>
+        /// Изменение данных видео по id
+        /// </summary>
+        /// <param name="id">Идентификатор видео</param>
+        /// <param name="videoData">Новые данные видео</param>
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch(string id, VideoMaterialData videoData)
         {
@@ -65,11 +85,15 @@ namespace cmet_backend.Controllers
             return ApiOk();
         }
 
+        /// <summary>
+        /// Удаление видео из списка материалов по id
+        /// </summary>
+        /// <param name="id">Идентификатор видео</param>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             logger.LogInformation($"Удаление видеоматериала с id {id}");
-            if (!(await repository.existsById(id)))
+            if (!(await repository.ExistsById(id)))
             {
                 return ApiError("NOT_FOUND", $"VideoMaterial with id {id} not found", 404);
             }

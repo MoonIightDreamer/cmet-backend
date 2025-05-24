@@ -55,7 +55,7 @@ namespace cmet_backend.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> existsById(string id)
+        public Task<bool> ExistsById(string id)
         {
             throw new NotImplementedException();
         }

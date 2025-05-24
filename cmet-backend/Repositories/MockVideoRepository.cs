@@ -38,7 +38,7 @@ namespace cmet_backend.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<bool> existsById(string id)
+        public Task<bool> ExistsById(string id)
         {
             return Task.FromResult(database.ContainsKey(id));
         }
