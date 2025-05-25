@@ -25,6 +25,18 @@ services:
             - db
         networks:
           - backend-network
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin
+        environment:
+          PGADMIN_DEFAULT_EMAIL: myuser@mail.com
+          PGADMIN_DEFAULT_PASSWORD: mypassword
+        networks:
+            - backend-network
+        ports:
+          - "5001:80"
+        depends_on:
+          - db
   
 volumes:
   db_data:
