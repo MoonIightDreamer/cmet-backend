@@ -1,4 +1,5 @@
 using cmet_backend.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System.Text.Json;
 
@@ -19,6 +20,8 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IVideoRepository, VideoRepository>();
 
 var app = builder.Build();
