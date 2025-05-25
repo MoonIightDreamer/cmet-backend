@@ -1,5 +1,6 @@
 ﻿using cmet_backend.Common;
 using cmet_backend.Video;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
@@ -26,6 +27,7 @@ namespace cmet_backend.Controllers
         /// <param name="id">Идентификатор видео</param>
         /// <returns>Информация о видео вместе со ссылкой</returns>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(string id)
         {
             logger.LogInformation($"Получние видеоматериала с id {id}");
@@ -43,6 +45,7 @@ namespace cmet_backend.Controllers
         /// </summary>
         /// <returns>Список видео</returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             return ApiOk(repository.GetAllAsync().Result);
@@ -53,6 +56,7 @@ namespace cmet_backend.Controllers
         /// </summary>
         /// <param name="videoData">Данные видео</param>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Add(VideoMaterialData videoData)
         {
             var entity = new VideoMaterial()
@@ -72,6 +76,7 @@ namespace cmet_backend.Controllers
         /// <param name="id">Идентификатор видео</param>
         /// <param name="videoData">Новые данные видео</param>
         [HttpPatch("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Patch(string id, VideoMaterialData videoData)
         {
             if (!(await repository.ExistsById(id)))
@@ -94,6 +99,7 @@ namespace cmet_backend.Controllers
         /// </summary>
         /// <param name="id">Идентификатор видео</param>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(string id)
         {
             logger.LogInformation($"Удаление видеоматериала с id {id}");

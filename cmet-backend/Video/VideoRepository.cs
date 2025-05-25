@@ -44,9 +44,9 @@ namespace cmet_backend.Video
             }
         }
 
-        public Task<bool> ExistsById(string id)
+        public async Task<bool> ExistsById(string id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<VideoMaterial>().AnyAsync(e => e.Id == id);
         }
     }
 }
