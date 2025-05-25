@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace cmet_backend.Entities
+namespace cmet_backend.Video
 {
     public class VideoMaterial
     {

@@ -1,6 +1,4 @@
-﻿using cmet_backend.Entities;
-
-namespace cmet_backend.Repositories
+﻿namespace cmet_backend.Video
 {
     public interface IVideoRepository
     {

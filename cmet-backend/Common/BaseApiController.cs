@@ -1,7 +1,6 @@
-﻿using cmet_backend.Common;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace cmet_backend.Controllers
+namespace cmet_backend.Common
 {
     [ApiController]
     public class BaseApiController : ControllerBase

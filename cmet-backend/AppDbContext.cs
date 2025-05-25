@@ -1,7 +1,7 @@
-﻿using cmet_backend.Entities;
+﻿using cmet_backend.Video;
 using Microsoft.EntityFrameworkCore;
 
-namespace cmet_backend.Repositories
+namespace cmet_backend
 {
     public class AppDbContext : DbContext
     {

@@ -1,4 +1,5 @@
-using cmet_backend.Repositories;
+using cmet_backend;
+using cmet_backend.Video;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System.Text.Json;

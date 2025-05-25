@@ -1,7 +1,6 @@
-﻿using cmet_backend.Entities;
-using System.Collections;
+﻿using System.Collections;
 
-namespace cmet_backend.Repositories
+namespace cmet_backend.Video
 {
     public class MockVideoRepository : IVideoRepository
     {

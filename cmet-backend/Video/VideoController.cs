@@ -1,5 +1,5 @@
-﻿using cmet_backend.Entities;
-using cmet_backend.Repositories;
+﻿using cmet_backend.Common;
+using cmet_backend.Video;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 

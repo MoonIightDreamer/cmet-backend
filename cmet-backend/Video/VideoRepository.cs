@@ -1,8 +1,7 @@
-﻿using cmet_backend.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace cmet_backend.Repositories
+namespace cmet_backend.Video
 {
     public class VideoRepository : IVideoRepository
     {
