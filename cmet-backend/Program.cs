@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
-builder.Services.AddSingleton<IVideoRepository, MockVideoRepository>();
+builder.Services.AddSingleton<IVideoRepository, VideoRepository>();
 
 var app = builder.Build();
 

@@ -18,7 +18,7 @@ namespace cmet_backend.Repositories
             return await _context.VideoMaterials.ToListAsync();
         }
 
-        public async Task<VideoMaterial?> GetByIdAsync(int id)
+        public async Task<VideoMaterial?> GetByIdAsync(string id)
         {
             return await _context.VideoMaterials.FindAsync(id);
         }
@@ -35,7 +35,7 @@ namespace cmet_backend.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
         {
             var entity = await _context.VideoMaterials.FindAsync(id);
             if (entity != null)
@@ -43,16 +43,6 @@ namespace cmet_backend.Repositories
                 _context.VideoMaterials.Remove(entity);
                 await _context.SaveChangesAsync();
             }
-        }
-
-        public Task<VideoMaterial?> GetByIdAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(string id)
-        {
-            throw new NotImplementedException();
         }
 
         public Task<bool> ExistsById(string id)
