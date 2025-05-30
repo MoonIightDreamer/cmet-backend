@@ -1,11 +1,18 @@
-﻿using cmet_backend.Video;
+﻿using cmet_backend.Content;
+using cmet_backend.Video;
 using Microsoft.EntityFrameworkCore;
 
 namespace cmet_backend
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<VideoMaterial> VideoMaterials { get; set; }
+        public DbSet<VideoMaterialEntity> VideoMaterials { get; set; }
+
+        public DbSet<ArticleEntity> Articles { get; set; }
+
+        public DbSet<AttachmentEntity> Attachments { get; set; }
+
+        public DbSet<UserEntity> Users { get; set; }    
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

@@ -12,23 +12,23 @@ namespace cmet_backend.Video
             _context = context;
         }
 
-        public async Task<IEnumerable<VideoMaterial>> GetAllAsync()
+        public async Task<IEnumerable<VideoMaterialEntity>> GetAllAsync()
         {
             return await _context.VideoMaterials.ToListAsync();
         }
 
-        public async Task<VideoMaterial?> GetByIdAsync(string id)
+        public async Task<VideoMaterialEntity?> GetByIdAsync(string id)
         {
             return await _context.VideoMaterials.FindAsync(id);
         }
 
-        public async Task AddAsync(VideoMaterial material)
+        public async Task AddAsync(VideoMaterialEntity material)
         {
             _context.VideoMaterials.Add(material);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(VideoMaterial material)
+        public async Task UpdateAsync(VideoMaterialEntity material)
         {
             _context.VideoMaterials.Update(material);
             await _context.SaveChangesAsync();
@@ -46,7 +46,7 @@ namespace cmet_backend.Video
 
         public async Task<bool> ExistsById(string id)
         {
-            return await _context.Set<VideoMaterial>().AnyAsync(e => e.Id == id);
+            return await _context.Set<VideoMaterialEntity>().AnyAsync(e => e.Id == id);
         }
     }
 }

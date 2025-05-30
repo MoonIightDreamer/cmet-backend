@@ -2,7 +2,6 @@
 using cmet_backend.Video;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
 
 namespace cmet_backend.Controllers
 {
@@ -59,12 +58,12 @@ namespace cmet_backend.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Add(VideoMaterialData videoData)
         {
-            var entity = new VideoMaterial()
+            var entity = new VideoMaterialEntity()
             {
                 Id = Guid.NewGuid().ToString(),
                 Description = videoData.Description,
                 CreatedAt = videoData.CreatedAt,
-                link = videoData.Link
+                Link = videoData.Link
             };
             await repository.AddAsync(entity);
             return ApiOk();
@@ -83,12 +82,12 @@ namespace cmet_backend.Controllers
             {
                 return ApiError("NOT_FOUND", $"VideoMaterial with id {id} not found", 404);
             }
-            var entity = new VideoMaterial()
+            var entity = new VideoMaterialEntity()
             {
                 Id = id,
                 Description = videoData.Description,
                 CreatedAt = videoData.CreatedAt,
-                link = videoData.Link
+                Link = videoData.Link
             };
             await repository.UpdateAsync(entity);
             return ApiOk();
