@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using cmet_backend;
@@ -11,9 +12,11 @@ using cmet_backend;
 namespace cmet_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608225404_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,36 +24,6 @@ namespace cmet_backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("cmet_backend.Attachment.AttachmentEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<string>("ReferenceId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("reference_id");
-
-                    b.Property<string>("ReferenceType")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("reference_type");
-
-                    b.Property<DateTime>("UploadedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("uploaded_at");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("attachment");
-                });
 
             modelBuilder.Entity("cmet_backend.Content.ArticleEntity", b =>
                 {
@@ -75,6 +48,31 @@ namespace cmet_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("article");
+                });
+
+            modelBuilder.Entity("cmet_backend.Content.AttachmentEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<string>("fk_attachment_to_content")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("fk_attachment_to_content");
+
+                    b.ToTable("attachment");
                 });
 
             modelBuilder.Entity("cmet_backend.UserEntity", b =>
@@ -111,6 +109,15 @@ namespace cmet_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("video_material");
+                });
+
+            modelBuilder.Entity("cmet_backend.Content.AttachmentEntity", b =>
+                {
+                    b.HasOne("cmet_backend.Content.ArticleEntity", "Content")
+                        .WithMany()
+                        .HasForeignKey("fk_attachment_to_content");
+
+                    b.Navigation("Content");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,6 +6,8 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using cmet_backend.Content;
+using cmet_backend.Attachment;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +54,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//repos
 builder.Services.AddScoped<IVideoRepository, VideoRepository>();
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<IAttachmentRepository, AttachmentRepository>();
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 var jwtOptions = builder.Configuration.GetSection("Jwt").Get<JwtOptions>();

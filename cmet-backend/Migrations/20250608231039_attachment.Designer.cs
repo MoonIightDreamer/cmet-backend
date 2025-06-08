@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using cmet_backend;
@@ -11,9 +12,11 @@ using cmet_backend;
 namespace cmet_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608231039_attachment")]
+    partial class attachment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,10 +31,15 @@ namespace cmet_backend.Migrations
                         .HasColumnType("text")
                         .HasColumnName("id");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("name");
+                        .HasColumnName("file_name");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("file_path");
 
                     b.Property<string>("ReferenceId")
                         .IsRequired()
@@ -42,10 +50,6 @@ namespace cmet_backend.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("reference_type");
-
-                    b.Property<DateTime>("UploadedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("uploaded_at");
 
                     b.HasKey("Id");
 

@@ -11,15 +11,15 @@ namespace cmet_backend.Content
         public required string Id { get; set; }
 
         [Required]
+        [Column(name: "title")]
+        public required string Title { get; set; }
+
+        [Required]
         [Column(name: "text")]
-        public required string text { get; set; }
+        public required string Text { get; set; }
 
         [Required]
         [Column(name: "created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        [Required]
-        [Column(name: "link")]
-        public required string link { get; set; }
     }
 }
